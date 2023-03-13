@@ -42,6 +42,9 @@ class Job(models.Model):
     expectation = models.TextField()
     created_date = models.DateField(auto_now_add=True)
 
+    soft_skill = models.ManyToManyField(JobStack, related_name="job")
+    will_be_plus = models.ManyToManyField(JobStack, related_name="will_be_plus")
+
     class Meta:
         verbose_name = "Job"
         verbose_name_plural = "Jobs"
