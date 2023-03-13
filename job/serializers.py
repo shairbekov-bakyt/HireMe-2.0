@@ -55,6 +55,8 @@ class JobDetail(serializers.ModelSerializer):
     job_benefits = serializers.StringRelatedField(many=True)
     job_stack = serializers.StringRelatedField(many=True)
     job_type = serializers.StringRelatedField(many=True)
+    will_be_plus = serializers.StringRelatedField(many=True)
+    soft_skill = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = Job
@@ -73,4 +75,6 @@ class JobDetail(serializers.ModelSerializer):
             "responsibility",
             "expectation",
             "job_benefits",
+            "soft_skill",
+            "will_be_plus",
         ]
