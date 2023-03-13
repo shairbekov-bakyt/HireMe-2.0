@@ -21,7 +21,6 @@ jobs:
           host: ${{ secrets.HOST_DNS }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
-
           script: |
             cd ${{ secrets.TARGET_DIR }}
             sudo docker-compose -p docker-compose-prod.yml build
