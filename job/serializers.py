@@ -4,10 +4,10 @@ from job.models import Job, JobBenefit, JobStack, JobType
 from user.models import Company  # type: ignore
 
 
-class CompanyList(serializers.ModelSerializer):
-    class Meta:
-        model = Company
-        fields = ["name", "image", "location"]
+class CompanyList(serializers.Serializer):
+    name = serializers.CharField()
+    image = serializers.ImageField()
+    location = serializers.CharField()
 
 
 class JobStackSerializer(serializers.ModelSerializer):
