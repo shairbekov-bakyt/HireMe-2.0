@@ -23,5 +23,5 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd ${{ secrets.TARGET_DIR }}
-            sudo docker-compose -p docker-compose-prod.yml build
-            sudo docker-compose -p docker-compose-prod.yml up -d
+            sudo docker-compose -f docker-compose-prod.yml build
+            sudo docker-compose -f docker-compose-prod.yml up -d
