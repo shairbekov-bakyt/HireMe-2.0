@@ -8,6 +8,7 @@ class CompanyList(serializers.Serializer):
     name = serializers.CharField()
     image = serializers.ImageField()
     location = serializers.CharField()
+    about_company = serializers.CharField()
 
 
 class JobStackSerializer(serializers.ModelSerializer):
