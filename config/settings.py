@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     # Third Party Apps
     "rest_framework",
     "drf_yasg",
-    "corsheaders"
+    "corsheaders",
 ]
 
 MY_APPS = ["user", "job"]
@@ -132,7 +132,7 @@ STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "frontend/static/"
 
 MEDIA_ROOT = BASE_DIR / "frontend/media/"
-MEDIA_URL = "/media/"
+MEDIA_URL = "media/"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 

@@ -17,7 +17,7 @@ class CompanyValue(models.Model):
 
 class Company(models.Model):
     name = models.CharField(max_length=255)
-    image = models.ImageField(null=True)
+    image = models.ImageField(upload_to="%Y/%M/%d/%h", null=True)
     occupation = models.CharField(null=True, max_length=255)
     about_company = models.CharField(max_length=255, null=True)
     email = models.EmailField(null=True)
