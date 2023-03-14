@@ -76,12 +76,12 @@ class UserViewSet(GenericViewSet):
     def sign_up(self, request):
         email = request.data["email"]
         password = request.data["password"]
-        User.objects.create(email=email, password=password, is_active=False)
 
         # generate temp password, send to user
         temp_password: int = save_temporary_password(email)
         send_password(email, temp_password)
 
+        User.objects.create(email=email, password=password, is_active=False)
         return Response({"message": "active your email"}, status=200)
 
     @swagger_auto_schema(
