@@ -1,24 +1,24 @@
 from django.db import models
 
-from user.models import Company
+from company.models import Company
+
+
+class Stack(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
 
 
 class JobType(models.Model):
-    position_type = models.TextField()
+    position_type = models.CharField(max_length=255)
 
     def __str__(self):
         return self.position_type
 
 
-class JobStack(models.Model):
-    stack = models.TextField()
-
-    def __str__(self):
-        return self.stack
-
-
 class JobBenefit(models.Model):
-    benefit = models.TextField()
+    benefit = models.CharField(max_length=255)
     job = models.ForeignKey(
         to="Job", on_delete=models.CASCADE, related_name="job_benefits"
     )
@@ -28,22 +28,22 @@ class JobBenefit(models.Model):
 
 
 class Job(models.Model):
-    position = models.TextField()
-    company = models.ForeignKey(Company, on_delete=models.PROTECT)
+    position = models.CharField(max_length=255)
+    company = models.ForeignKey(Company, on_delete=models.PROTECT, related_name="vacancies")
     from_salary = models.IntegerField(default=0)
     to_salary = models.IntegerField(blank=True, null=True)
     job_type = models.ManyToManyField(JobType, related_name="types")
     from_experience = models.IntegerField(default=0)
     to_experience = models.IntegerField(blank=True, null=True)
-    job_stack = models.ManyToManyField(JobStack, related_name="stacks")
+    job_stack = models.ManyToManyField(Stack, related_name="stacks")
 
-    description = models.TextField()
-    responsibility = models.TextField(verbose_name="responsibilities")
-    expectation = models.TextField()
+    description = models.CharField(max_length=255)
+    responsibility = models.CharField(max_length=255, verbose_name="responsibilities")
+    expectation = models.CharField(max_length=255)
     created_date = models.DateField(auto_now_add=True)
 
-    soft_skill = models.ManyToManyField(JobStack, related_name="job")
-    will_be_plus = models.ManyToManyField(JobStack, related_name="will_be_plus")
+    soft_skill = models.ManyToManyField(Stack, related_name="job")
+    will_be_plus = models.ManyToManyField(Stack, related_name="will_be_plus")
 
     class Meta:
         verbose_name = "Job"

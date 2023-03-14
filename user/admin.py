@@ -4,9 +4,6 @@ from user.models import (
     User,
     UserAmbition,
     UserWorkExperience,
-    Company,
-    CompanyValue,
-    Stack,
     WorkExpectation,
 )
 
@@ -14,7 +11,4 @@ from user.models import (
 admin.site.register(User)
 admin.site.register(UserAmbition)
 admin.site.register(UserWorkExperience)
-admin.site.register(Company)
-admin.site.register(Stack)
-admin.site.register(CompanyValue)
 admin.site.register(WorkExpectation)

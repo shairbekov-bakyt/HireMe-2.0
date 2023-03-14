@@ -1,15 +1,16 @@
+import django_filters
+
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import filters
-import django_filters
 from django_filters.rest_framework import DjangoFilterBackend
-from job.models import Job, JobStack
+from job.models import Job, Stack
 from job.serializers import JobList, JobDetail
 
 
 class JobFilter(django_filters.FilterSet):
     job_stack = django_filters.ModelMultipleChoiceFilter(
-        field_name="job_stack", queryset=JobStack.objects.all()
+        field_name="job_stack", queryset=Stack.objects.all()
     )
 
     class Meta:
