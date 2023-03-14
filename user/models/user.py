@@ -1,35 +1,14 @@
 from django.db import models
 
+from company.models import Company
+from job.models import Stack
+
 
 class WorkExpectation(models.Model):
     work_type = models.CharField(max_length=255)
 
     def __str__(self):
         return self.work_type
-
-
-class CompanyValue(models.Model):
-    value = models.CharField(max_length=255)
-    company = models.ForeignKey(
-        "Company", on_delete=models.CASCADE, related_name="values"
-    )
-
-
-class Company(models.Model):
-    name = models.CharField(max_length=255)
-    image = models.ImageField(upload_to="%Y/%M/%d/%h", null=True)
-    occupation = models.CharField(null=True, max_length=255)
-    about_company = models.CharField(max_length=255, null=True)
-    email = models.EmailField(null=True)
-    company_website = models.URLField()
-    location = models.CharField(max_length=255)
-
-
-class Stack(models.Model):
-    name = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.name
 
 
 class UserWorkExperience(models.Model):

@@ -1,7 +1,5 @@
 from rest_framework import serializers
 
-from user.models.user import UserAmbition, UserWorkExperience
-
 
 class UserSignInSerializer(serializers.Serializer):
     email = serializers.EmailField()

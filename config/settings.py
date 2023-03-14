@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     "corsheaders",
 ]
 
-MY_APPS = ["user", "job"]
+MY_APPS = ["user", "job", "company"]
 INSTALLED_APPS += MY_APPS
 
 MIDDLEWARE = [

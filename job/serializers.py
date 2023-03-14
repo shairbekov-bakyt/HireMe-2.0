@@ -1,19 +1,12 @@
 from rest_framework import serializers
 
-from job.models import Job, JobBenefit, JobStack, JobType
-from user.models import Company  # type: ignore
-
-
-class CompanyList(serializers.Serializer):
-    name = serializers.CharField()
-    image = serializers.ImageField()
-    location = serializers.CharField()
-    about_company = serializers.CharField()
+from job.models import Job, JobBenefit, Stack, JobType
+from company.serializers import CompanyListSerializer
 
 
 class JobStackSerializer(serializers.ModelSerializer):
     class Meta:
-        model = JobStack
+        model = Stack
         fields = ["stack"]
 
 
@@ -30,7 +23,7 @@ class JobBenefitSerializer(serializers.ModelSerializer):
 
 
 class JobList(serializers.ModelSerializer):
-    company = CompanyList()
+    company = CompanyListSerializer()
     job_stack = serializers.StringRelatedField(many=True)
     job_type = serializers.StringRelatedField(many=True)
 
@@ -52,7 +45,7 @@ class JobList(serializers.ModelSerializer):
 
 
 class JobDetail(serializers.ModelSerializer):
-    company = CompanyList()
+    company = CompanyListSerializer()
     job_benefits = serializers.StringRelatedField(many=True)
     job_stack = serializers.StringRelatedField(many=True)
     job_type = serializers.StringRelatedField(many=True)
