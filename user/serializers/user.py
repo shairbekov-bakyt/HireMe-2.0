@@ -25,6 +25,7 @@ class UserSerializer(serializers.Serializer):
     work_expectations = serializers.StringRelatedField(many=True)
     salary_expectation = serializers.IntegerField()
     experience_year = serializers.IntegerField()
+    photo = serializers.ImageField()
     user_ambitions = serializers.SlugRelatedField(
         slug_field="about_myself", read_only=True
     )
@@ -63,11 +64,10 @@ class UserWorkExperienceUpdateSerializer(serializers.ListSerializer):
 
 
 class UserDetailSerializer(serializers.Serializer):
+    location = serializers.CharField()
     full_name = serializers.CharField()
     position = serializers.CharField()
-    user_ambitions = serializers.SlugRelatedField(
-        slug_field="about_myself", read_only=True
-    )
+    user_ambition = UserAmbitions()
     stacks = serializers.StringRelatedField(many=True)
     linkedIn = serializers.URLField()
     telegram = serializers.URLField()
@@ -77,6 +77,8 @@ class UserDetailSerializer(serializers.Serializer):
     work_expectations = serializers.StringRelatedField(many=True)
     salary_expectation = serializers.IntegerField()
     worked_companies = UserWorkExperienceSerializer(many=True)
+    photo = serializers.ImageField()
+    experience_year = serializers.IntegerField()
 
 
 class StackUpdateSerializer(serializers.Serializer):
