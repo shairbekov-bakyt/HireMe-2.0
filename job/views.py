@@ -4,7 +4,7 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
-from job.models import Job, Stack
+from job.models import Job, JobType, Stack
 from job.serializers import JobList, JobDetail
 
 
@@ -12,10 +12,15 @@ class JobFilter(django_filters.FilterSet):
     job_stack = django_filters.ModelMultipleChoiceFilter(
         field_name="job_stack", queryset=Stack.objects.all()
     )
+    job_type = django_filters.ModelMultipleChoiceFilter(
+        field_name="job_type", queryset=JobType.objects.all()
+    )
+    from_salary = django_filters.NumberFilter(lookup_expr="gt")
+    from_experience = django_filters.NumberFilter(lookup_expr="gt")
 
     class Meta:
         model = Job
-        fields = ["job_stack"]
+        fields = ["job_stack", "from_salary", "job_type"]
 
 
 class JobViewSet(viewsets.ModelViewSet):
