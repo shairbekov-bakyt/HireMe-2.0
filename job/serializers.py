@@ -72,3 +72,9 @@ class JobDetail(serializers.ModelSerializer):
             "soft_skill",
             "will_be_plus",
         ]
+
+
+class StackSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Stack
+        fields = ["id", "name"]
