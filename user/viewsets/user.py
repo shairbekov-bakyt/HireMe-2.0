@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.decorators import action
-from drf_yasg.utils import serializers, swagger_auto_schema
+from drf_yasg.utils import swagger_auto_schema
 
 
 from user.models import User, UserAmbition, Stack
@@ -61,8 +61,9 @@ class UserViewSet(GenericViewSet):
         payload = {
             "email": user.email,
         }
-        access_token = get_user_access_token(payload)
-        return Response(access_token, status=200)
+        response = get_user_access_token(payload)
+        response["user_id"] = user.pk
+        return Response(response, status=200)
 
     @swagger_auto_schema(
         methods=["post"], tags=["users"], request_body=UserSignUpSerializer

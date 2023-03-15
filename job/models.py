@@ -29,7 +29,9 @@ class JobBenefit(models.Model):
 
 class Job(models.Model):
     position = models.CharField(max_length=255)
-    company = models.ForeignKey(Company, on_delete=models.PROTECT, related_name="vacancies")
+    company = models.ForeignKey(
+        Company, on_delete=models.PROTECT, related_name="vacancies"
+    )
     from_salary = models.IntegerField(default=0)
     to_salary = models.IntegerField(blank=True, null=True)
     job_type = models.ManyToManyField(JobType, related_name="types")

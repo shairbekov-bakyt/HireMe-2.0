@@ -11,6 +11,7 @@ class UserSignUpSerializer(UserSignInSerializer):
 
 
 class TokenSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
     token = serializers.CharField()
 
 
