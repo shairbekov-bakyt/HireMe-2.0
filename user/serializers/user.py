@@ -11,7 +11,7 @@ class UserSignUpSerializer(UserSignInSerializer):
 
 
 class TokenSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
+    user_id = serializers.IntegerField()
     token = serializers.CharField()
 
 
@@ -89,6 +89,8 @@ class UserUpdateSerializer(serializers.Serializer):
     last_name = serializers.CharField()
     phone_number = serializers.CharField()
     salary_expectation = serializers.IntegerField()
+    experience_year = serializers.IntegerField()
+    position = serializers.CharField()
     linkedIn = serializers.URLField()
     telegram = serializers.URLField()
     github = serializers.URLField()

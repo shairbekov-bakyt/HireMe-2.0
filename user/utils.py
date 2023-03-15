@@ -10,7 +10,6 @@ from django.core.mail import send_mail
 
 def get_user_access_token(payload: dict) -> dict:
     payload["exp"] = timedelta(days=7).total_seconds()
-    payload["is_sales_manager"] = False
     access_token = {"token": jwt.encode(payload, os.getenv("SECRET_KEY", ""))}
     return access_token
 

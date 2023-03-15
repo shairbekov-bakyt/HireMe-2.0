@@ -1,5 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
 from drf_yasg.utils import swagger_auto_schema
 
@@ -108,7 +109,12 @@ class UserViewSet(GenericViewSet):
     @swagger_auto_schema(
         methods=["put"], tags=["users"], request_body=UserUpdateSerializer
     )
-    @action(detail=False, methods=["put"], url_path="general")
+    @action(
+        detail=False,
+        methods=["put"],
+        url_path="general",
+        permission_classes=[IsAuthenticated],
+    )
     def user_update(self, request):
         serializer = UserUpdateSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -118,7 +124,12 @@ class UserViewSet(GenericViewSet):
     @swagger_auto_schema(
         methods=["put"], tags=["users"], request_body=UserAmbitionUpdateSerializer
     )
-    @action(detail=False, methods=["put"], url_path="ambition")
+    @action(
+        detail=False,
+        methods=["put"],
+        url_path="ambition",
+        permission_classes=[IsAuthenticated],
+    )
     def user_ambition_update(self, request):
         serializer = UserAmbitionUpdateSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -135,7 +146,12 @@ class UserViewSet(GenericViewSet):
     @swagger_auto_schema(
         methods=["put"], tags=["users"], request_body=UserWorkExperienceUpdateSerializer
     )
-    @action(detail=False, methods=["put"], url_path="experience")
+    @action(
+        detail=False,
+        methods=["put"],
+        url_path="experience",
+        permission_classes=[IsAuthenticated],
+    )
     def user_experience_update(self, request):
         serializer = UserWorkExperienceUpdateSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)

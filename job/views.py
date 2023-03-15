@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
 from job.models import Job, JobType, Stack
-from job.serializers import JobList, JobDetail
+from job.serializers import JobList, JobDetail, StackSerializer
 
 
 class JobFilter(django_filters.FilterSet):
@@ -35,3 +35,9 @@ class JobViewSet(viewsets.ModelViewSet):
         instance = self.get_object()
         serializer = JobDetail(instance)
         return Response(serializer.data)
+
+
+class StackViewSet(viewsets.ModelViewSet):
+    queryset = Stack.objects.all()
+    serializer_class = StackSerializer
+    http_method_names = ["get"]
