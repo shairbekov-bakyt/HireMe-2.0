@@ -113,7 +113,7 @@ class UserViewSet(GenericViewSet):
         detail=False,
         methods=["put"],
         url_path="general",
-        permission_classes=[IsAuthenticated],
+        permission_classes=[],
     )
     def user_update(self, request):
         serializer = UserUpdateSerializer(data=request.data)
@@ -128,7 +128,7 @@ class UserViewSet(GenericViewSet):
         detail=False,
         methods=["put"],
         url_path="ambition",
-        permission_classes=[IsAuthenticated],
+        permission_classes=[],
     )
     def user_ambition_update(self, request):
         serializer = UserAmbitionUpdateSerializer(data=request.data)
@@ -150,7 +150,7 @@ class UserViewSet(GenericViewSet):
         detail=False,
         methods=["put"],
         url_path="experience",
-        permission_classes=[IsAuthenticated],
+        permission_classes=[],
     )
     def user_experience_update(self, request):
         serializer = UserWorkExperienceUpdateSerializer(data=request.data)
