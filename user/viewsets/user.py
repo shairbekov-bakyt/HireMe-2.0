@@ -31,7 +31,6 @@ from user.serializers import (
 class UserViewSet(GenericViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = []
 
     @swagger_auto_schema(
         methods=["post"],
@@ -61,6 +60,7 @@ class UserViewSet(GenericViewSet):
 
         payload = {
             "email": user.email,
+            "user_id": user.pk,
         }
         response = get_user_access_token(payload)
         response["user_id"] = user.pk
