@@ -65,6 +65,8 @@ class UserWorkExperienceUpdateSerializer(serializers.ListSerializer):
 class UserDetailSerializer(serializers.Serializer):
     location = serializers.CharField()
     full_name = serializers.CharField()
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
     position = serializers.CharField()
     user_ambition = UserAmbitions()
     stacks = serializers.StringRelatedField(many=True)
