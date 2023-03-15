@@ -1,8 +1,17 @@
+import django_filters
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
 from company.models import Company
 from company.serializers import CompanyListSerializer, CompanyDetailSerializer
+
+
+class CompanyListFilter(django_filters.FilterSet):
+    location = django_filters.CharFilter(lookup_expr="iexect")
+
+    class Meta:
+        model = Company
+        fields = ["location"]
 
 
 class CompanyViewSet(GenericViewSet):

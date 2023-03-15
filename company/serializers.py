@@ -19,7 +19,7 @@ class CompanyListSerializer(serializers.Serializer):
     location = serializers.CharField()
     image = serializers.ImageField()
     about_company = serializers.CharField()
-    employer = serializers.IntegerField()
+    employers_number = serializers.IntegerField()
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
@@ -32,7 +32,7 @@ class CompanyDetailSerializer(serializers.Serializer):
     location = serializers.CharField()
     image = serializers.ImageField()
     about_company = serializers.CharField()
-    employer = serializers.IntegerField()
+    employers_number = serializers.IntegerField()
     occupation = serializers.CharField()
     values = serializers.StringRelatedField(many=True)
     company_website = serializers.URLField()

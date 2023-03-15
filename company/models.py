@@ -10,6 +10,21 @@ class CompanyValue(models.Model):
     def __str__(self):
         return self.value
 
+    class Meta:
+        verbose_name = "Company Value"
+        verbose_name_plural = "Company Values"
+
+
+class CompanyType(models.Model):
+    company_type = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.company_type
+
+    class Meta:
+        verbose_name = "Company Type"
+        verbose_name_plural = "Company Types"
+
 
 class Company(models.Model):
     name = models.CharField(max_length=255)
@@ -18,4 +33,9 @@ class Company(models.Model):
     about_company = models.TextField(null=True)
     company_website = models.URLField()
     location = models.CharField(max_length=255)
-    employer = models.IntegerField()
+    company_type = models.ManyToManyField(CompanyType)
+    employers_number = models.IntegerField()
+
+    class Meta:
+        verbose_name = "Company"
+        verbose_name_plural = "Companies"
