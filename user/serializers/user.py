@@ -43,6 +43,7 @@ class UserCompanySerializer(serializers.Serializer):
 
 
 class UserWorkExperienceSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
     company = UserCompanySerializer()
     start_date = serializers.DateField()
     end_date = serializers.DateField()
@@ -62,6 +63,11 @@ class UserWorkExperienceUpdateSerializer(serializers.ListSerializer):
     child = UserExperienceUpdate()
 
 
+class StackSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    name = serializers.CharField()
+
+
 class UserDetailSerializer(serializers.Serializer):
     location = serializers.CharField()
     full_name = serializers.CharField()
@@ -69,7 +75,7 @@ class UserDetailSerializer(serializers.Serializer):
     last_name = serializers.CharField()
     position = serializers.CharField()
     user_ambition = UserAmbitions()
-    stacks = serializers.StringRelatedField(many=True)
+    stacks = StackSerializer(many=True)
     linkedIn = serializers.URLField()
     telegram = serializers.URLField()
     github = serializers.URLField()

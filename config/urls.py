@@ -42,6 +42,7 @@ urlpatterns = [
     path("api/v1/", include("user.urls")),
     path("api/v1/", include("job.urls")),
     path("api/v1/", include("company.urls")),
+    path("__debug__/", include("debug_toolbar.urls")),
     re_path(
         r"^swagger(?P<format>\.json|\.yaml)$",
         schema_view.without_ui(cache_timeout=0),

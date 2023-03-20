@@ -1,6 +1,5 @@
 import os
 import random
-from datetime import timedelta
 
 import jwt
 import redis

@@ -43,12 +43,14 @@ INSTALLED_APPS = [
     "rest_framework",
     "drf_yasg",
     "corsheaders",
+    "debug_toolbar",
 ]
 
 MY_APPS = ["user", "job", "company"]
 INSTALLED_APPS += MY_APPS
 
 MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
@@ -137,11 +139,20 @@ MEDIA_URL = "media/"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
+
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "user.services.TokenAuthentication",
     ]
 }
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": f"redis://{os.getenv('REDIS_HOST', '0.0.0.0:6379')}",
+    }
+}
+
 
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -174,3 +185,9 @@ EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "siteseogram@gmail.com"
 EMAIL_HOST_PASSWORD = "uspntgdjpvsofndy"
 EMAIL_PORT = 587
+
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
+]
