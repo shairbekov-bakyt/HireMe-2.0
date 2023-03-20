@@ -1,3 +1,8 @@
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.core.cache import cache
+
+
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.permissions import IsAuthenticated
@@ -25,12 +30,31 @@ from user.serializers import (
     TokenSerializer,
     UserUpdateSerializer,
     UserAmbitionUpdateSerializer,
+    UserWorkExperienceSerializer,
 )
 
 
 class UserViewSet(GenericViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    @method_decorator(cache_page(60 * 60 * 2))
+    @swagger_auto_schema(
+        methods=["get"],
+        tags=["users"],
+        response={200: UserWorkExperienceSerializer},
+    )
+    @action(
+        detail=False,
+        methods=["get"],
+        url_path="companies",
+        permission_classes=[IsAuthenticated],
+    )
+    def companies(self, request):
+        user = request.user
+        companies = user.worked_companies.all()
+        serializer = UserWorkExperienceSerializer(companies, many=True)
+        return Response(serializer.data, status=200)
 
     @swagger_auto_schema(
         methods=["post"],
@@ -138,6 +162,7 @@ class UserViewSet(GenericViewSet):
         ambition = serializer
         user = request.user
         user.stacks.set(Stack.objects.filter(pk__in=stacks))
+
         user_ambition, created = UserAmbition.objects.get_or_create(
             user=user, **ambition
         )
@@ -179,5 +204,11 @@ class UserViewSet(GenericViewSet):
         return Response(serializer.data, status=200)
 
     def list(self, request):
+        cache_key = "users"
         serializer = self.get_serializer(self.queryset, many=True)
+        get_cache = cache.get(cache_key)
+        if get_cache:
+            return Response(get_cache, status=200)
+
+        cache.set(cache_key, serializer.data, 60 * 60 * 2)
         return Response(serializer.data, status=200)
