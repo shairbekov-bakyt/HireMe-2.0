@@ -5,8 +5,7 @@ on:
     paths:
       - '*.py'
 
-  branches: 
-      - '**' 
+  branches: ["main"]
 
 jobs:
   flake8:
