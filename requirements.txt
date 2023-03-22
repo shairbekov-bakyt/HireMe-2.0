@@ -1,4 +1,4 @@
-Ddjango-stubs==1.15.0
+django-stubs==1.15.0
 django==4.1.7
 djangorestframework==3.14.0
 drf-yasg==1.21.5
