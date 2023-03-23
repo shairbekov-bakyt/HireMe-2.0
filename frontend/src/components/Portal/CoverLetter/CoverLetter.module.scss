@@ -1,0 +1,95 @@
+@import '@/styles/_root.scss';
+
+.modal {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+
+    .modal__title {
+        padding-top: 15px;
+        color: $violet;
+        text-align: center;
+        font: $font80021;
+    }
+
+    .textarea {
+        width: 100%;
+        min-height: 200px;
+        min-width: 100%;
+        max-width: 100%;
+        height: fit-content;
+        border-radius: 4px;
+        border: 2px solid $violet;
+        outline: none;
+        font: $font60016;
+        padding: 4px 14px;
+    }
+
+    .template__btns {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+
+        .save {
+            padding: 6px 10px;
+            border-radius: 4px;
+            background-color: white;
+            border: 2px solid $violet;
+            color: $violet;
+            font: $font60014;
+            cursor: pointer;
+        }
+
+        .tempalte {
+            padding: 4px 6px;
+            border-radius: 4px;
+            background-color: $violet;
+            border: 2px solid $violet;
+            color: white;
+            font: $font60014;
+            cursor: pointer;
+        }
+
+        .send {
+            padding: 6px 10px;
+            border-radius: 4px;
+            background-color: $violet;
+            border: 2px solid $violet;
+            color: white;
+            font: $font60014;
+            cursor: pointer;
+        }
+    }
+}
+
+@media (max-width: 575.98px) {
+    .modal {
+        .modal__title {
+            font: $font80019;
+        }
+
+        .textarea {
+            font: $font60015;
+        }
+
+
+
+        .template__btns {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+
+            .save,
+            .tempalte,
+            .send {
+                font-size: 13px;
+            }
+        }
+    }
+}

@@ -1,0 +1,146 @@
+@import '@/styles/_root.scss';
+
+.wrapper {
+    max-width: $xl;
+    margin: 0 auto;
+    padding: 90px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .title {
+        text-align: center;
+        font: 800 50px/70px 'Montserrat';
+        color: var(--black);
+
+        span {
+            color: var(--color-text);
+        }
+    }
+
+    .blocks {
+        margin-top: 40px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        width: 100%;
+
+        .block {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-radius: 10px;
+            transition: 0.3s;
+
+
+            &:hover {
+                transform: scale(1.02);
+            }
+
+
+            .icons {
+                width: 100%;
+                height: auto;
+                border-radius: 6px;
+            }
+
+            .block__descr {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+
+                .number {
+                    color: var(--color-text);
+                    font: $font80030;
+                }
+
+                .title {
+                    text-align: left;
+                    font: $font70020;
+                    color: var(--black);
+                }
+            }
+        }
+    }
+}
+
+
+@media (max-width: 991.98px) {
+    .wrapper {
+        .title {
+            font: 800 40px/70px 'Montserrat';
+        }
+
+        .blocks {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+}
+
+@media (max-width: 767.98px) {
+    .wrapper {
+        padding: 0px 20px 50px 20px;
+
+        .title {
+            font: 800 33px/50px 'Montserrat';
+        }
+
+        .descr {
+            max-width: 500px;
+            line-height: 25px;
+        }
+
+        .blocks {
+            grid-template-columns: repeat(1, 1fr);
+            gap: 20px;
+
+            .block {
+                align-items: center;
+
+                .icons {
+                    max-width: 500px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 575.98px) {
+    .wrapper {
+
+        .title {
+            font: 800 30px/40px 'Montserrat';
+        }
+
+        .descr {
+            margin-top: 10px;
+            font: $font50014;
+            line-height: 25px;
+        }
+
+        .blocks {
+            margin-top: 25px;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 20px;
+
+            .block {
+                align-items: start;
+                gap: 8px;
+
+                .icons {
+                    max-width: 500px;
+                    height: auto;
+                    border-radius: 6px;
+                }
+
+                .block__descr {
+                    .title {
+                        font: $font70017;
+                    }
+                }
+            }
+        }
+    }
+}

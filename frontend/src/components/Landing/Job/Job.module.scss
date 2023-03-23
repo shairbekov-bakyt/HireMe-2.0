@@ -1,0 +1,91 @@
+@import '@/styles/_root.scss';
+
+.wrapper {
+    max-width: $xl;
+    margin: 0 auto;
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+
+    .title {
+        width: 100%;
+        text-align: start;
+        font: 800 50px/70px 'Montserrat';
+        color: var(--black);
+
+        span {
+            color: var(--color-text);
+        }
+    }
+
+    .descr {
+        margin-top: 20px;
+        max-width: 700px;
+        text-align: start;
+        font: $font40016;
+        line-height: 30px;
+        color: var(--black);
+    }
+
+    .blocks {
+        margin-top: 40px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .wrapper {
+        .title {
+            font: 800 40px/70px 'Montserrat';
+        }
+
+        .blocks {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+}
+
+@media (max-width: 767.98px) {
+    .wrapper {
+        padding: 0px 20px 50px 20px;
+
+        .title {
+            font: 800 33px/70px 'Montserrat';
+        }
+
+        .descr {
+            max-width: 500px;
+            line-height: 25px;
+        }
+
+        .blocks {
+            grid-template-columns: repeat(1, 1fr);
+            gap: 20px;
+        }
+    }
+}
+
+@media (max-width: 575.98px) {
+    .wrapper {
+
+        .title {
+            font: 800 30px/40px 'Montserrat';
+        }
+
+        .descr {
+            margin-top: 10px;
+            font: $font50014;
+            line-height: 25px;
+        }
+
+        .blocks {
+            margin-top: 25px;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 20px;
+        }
+    }
+}
