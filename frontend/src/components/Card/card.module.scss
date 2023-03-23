@@ -1,0 +1,194 @@
+@import '@/styles/_root.scss';
+
+.block {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    height: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow) 0px 0 10px;
+    background-color: var(--background);
+
+    .company {
+        display: flex;
+        gap: 15px;
+        height: 50px;
+
+        .company__icon {
+            width: 50px;
+            height: 50px;
+            padding: 2px;
+            object-fit: contain;
+            border-radius: 6px;
+            background-color: var(--background);
+            font: $font70032;
+            display: grid;
+            place-items: center;
+        }
+
+        .company__descr {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+
+            .company__name {
+                font: $font70019;
+                cursor: pointer;
+                color: var(--black);
+            }
+
+            .company__location {
+                font: $font40015;
+                color: var(--black);
+            }
+        }
+    }
+
+    .company__title {
+        font: $font70019;
+        color: var(--black);
+    }
+
+    .company__descr {
+        font: $font40016;
+        color: var(--black);
+        line-height: 24px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .condition {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        li {
+            font: $font60016;
+            padding: 4px 14px;
+            border-radius: 4px;
+            box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 2px;
+            background-color: var(--bg-fon);
+
+            a {
+                font: $font60016;
+            }
+        }
+
+        .remote {
+            color: #2b6bd3;
+        }
+
+        .sale {
+            color: #67b974;
+        }
+
+        .type {
+            color: #f2763d;
+        }
+
+        .year {
+            color: #79cfc9;
+        }
+    }
+
+    .btns {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-top: 5px;
+
+        .apply,
+        .view {
+            width: 100%;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font: $font60015;
+            cursor: pointer;
+            transition: 0.3s;
+            display: grid;
+            place-items: center;
+
+            &:hover {
+                transform: translateY(-2px);
+            }
+        }
+
+        .apply {
+            color: white;
+            border: none;
+            background: var(--color-text);
+        }
+
+        .view {
+            border: 2px solid var(--color-text);
+            background: transparent;
+            color: var(--color-text);
+        }
+
+    }
+
+    .view {
+        text-align: center;
+        width: 100%;
+        padding: 8px 20px;
+        border-radius: 4px;
+        font: $font60015;
+        cursor: pointer;
+        transition: 0.3s;
+        border: 2px solid var(--color-text);
+        background: transparent;
+        color: var(--color-text);
+
+        &:hover {
+            transform: translateY(-2px);
+        }
+    }
+}
+
+@media (max-width: 767.98px) {
+    .block {
+        .company {
+            height: 50px;
+
+            .company__icon {
+                width: 50px;
+            }
+        }
+    }
+}
+
+@media (max-width: 575.98px) {
+    .block {
+        .btns {
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .modal {
+            .modal__title {
+                font: $font80019;
+            }
+
+            .textarea {
+                font: $font60015;
+            }
+
+            .template__btns {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+
+                .save,
+                .tempalte,
+                .send {
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+}

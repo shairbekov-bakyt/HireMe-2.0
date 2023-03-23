@@ -1,0 +1,139 @@
+@import '@/styles/_root.scss';
+
+.work_experience {
+    box-shadow: var(--box-shadow) 0px 0 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+    margin-bottom: 15px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    &:nth-child(2) {
+        margin-top: 15px;
+    }
+
+    .detail__logo {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 15px;
+
+        .icon {
+            min-width: 60px;
+            height: 60px;
+            object-fit: cover;
+            padding: 8px;
+            border-radius: 6px;
+            background-color: var(--background);
+            box-shadow: rgba(255, 255, 255, 0.06) 0px 0px 0px 2px;
+        }
+
+        .logo__between {
+            min-height: 60px;
+            gap: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .logo__name {
+                color: var(--black);
+                font: $font70019;
+            }
+
+            .logo__descr {
+                width: fit-content;
+                font: $font60016;
+                padding: 4px 14px;
+                border-radius: 4px;
+                box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 2px;
+                background-color: var(--bg-fon);
+            }
+        }
+    }
+
+    .logo__descr__mobile {
+        display: none;
+    }
+
+    .detail__title {
+        font: $font60016;
+        color: var(--black);
+    }
+
+    .detail__descr {
+        list-style: circle;
+        margin-top: 10px;
+        font: $font60015;
+        color: rgb(79, 79, 79);
+        color: var(--text-gray);
+    }
+
+    .stack {
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        li {
+            list-style: none;
+            width: fit-content;
+            font: $font60016;
+            padding: 4px 14px;
+            border-radius: 4px;
+            box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 2px;
+            background-color: var(--bg-fon);
+        }
+    }
+}
+
+@media (max-width: 575.98px) {
+    .work_experience {
+        .detail__logo {
+            .icon {
+                min-width: 50px;
+                height: 50px;
+            }
+
+            .logo__between {
+                min-height: 50px;
+                justify-content: center;
+
+                .logo__name {
+                    font: $font70019;
+                }
+
+                .logo__descr {
+                    display: none;
+                }
+            }
+        }
+
+        .detail__title {
+            font: $font60015;
+        }
+
+        .logo__descr__mobile {
+            width: fit-content;
+            font: $font60015;
+            margin-bottom: 10px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            background-color: #f4f4fc;
+            color: #2b6bd3;
+            display: block;
+        }
+
+        .detail__descr {
+            font: $font60015;
+        }
+
+        .stack {
+            li {
+                font: $font60015;
+            }
+        }
+    }
+}

@@ -1,4 +1,4 @@
-Ddjango-stubs==1.15.0
+django-stubs==1.15.0
 django==4.1.7
 djangorestframework==3.14.0
 drf-yasg==1.21.5
@@ -9,3 +9,4 @@ redis==4.5.1
 PyJWT==2.6.0
 django-filter==22.1
 django-cors-headers==3.13.0
+django_debug_toolbar==3.8.1
