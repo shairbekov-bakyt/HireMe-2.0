@@ -177,22 +177,13 @@ class UserViewSet(GenericViewSet):
         url_path="experience",
         # permission_classes=[],
     )
-    def user_experience_update(self, request):
-        serializer = UserWorkExperienceUpdateSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer = serializer.data
-        user = User.objects.get(pk=1)
-        for work in serializer:
-            company_name = work.pop("company")
-            stacks = work.pop("stacks")
-            created_company, created = Company.objects.get_or_create(name=company_name)
-            experience, created = UserWorkExperience.objects.get_or_create(
-                user=user, company=created_company, **work
-            )
-            experience.stacks.set(Stack.objects.filter(pk__in=stacks))
-            experience.save()
-
-        return Response({"message": "user updated successfully"})
+    def user_experience_update(self, request, pk):
+        instance = UserWorkExperience.objects.get(pk=pk)
+        serializer = UserWorkExperienceSerializer(instance)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data, status=200)
+        return Response(serializer.data, status=404)
 
     def retrieve(self, request, pk):
         try:
