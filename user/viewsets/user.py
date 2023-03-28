@@ -1,5 +1,3 @@
-from django.utils.decorators import method_decorator
-from django.views.decorators.cache import cache_page
 from django.core.cache import cache
 
 
@@ -73,7 +71,7 @@ class UserViewSet(GenericViewSet):
             company = UserWorkExperience.objects.get(pk=id)
             serializer = UserExperienceUpdate(company)
             return Response(serializer.data, status=200)
-        except:
+        except UserWorkExperience.DoesNotExist:
             return Response({"message": "company not found"}, status=200)
 
     @swagger_auto_schema(
@@ -215,6 +213,7 @@ class UserViewSet(GenericViewSet):
         permission_classes=[],
     )
     def user_experience_update(self, request):
+        user = request.user
         serializer = UserWorkExperienceUpdateSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer = serializer.data
