@@ -33,7 +33,7 @@ class Company(models.Model):
     about_company = models.TextField(null=True)
     company_website = models.URLField()
     location = models.CharField(max_length=255)
-    company_type = models.ManyToManyField(CompanyType)
+    # company_type = models.ManyToManyField(CompanyType)
     employers_number = models.IntegerField()
 
     class Meta:

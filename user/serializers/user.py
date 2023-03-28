@@ -33,7 +33,6 @@ class UserSerializer(serializers.Serializer):
 class UserAmbitions(serializers.Serializer):
     about_myself = serializers.CharField()
     achievement = serializers.CharField()
-    expectation = serializers.CharField()
 
 
 class UserCompanySerializer(serializers.Serializer):
@@ -45,6 +44,7 @@ class UserCompanySerializer(serializers.Serializer):
 class UserWorkExperienceSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     company = UserCompanySerializer()
+    occupation = serializers.CharField()
     start_date = serializers.DateField()
     end_date = serializers.DateField()
     responsibilities = serializers.CharField()
@@ -52,6 +52,7 @@ class UserWorkExperienceSerializer(serializers.Serializer):
 
 
 class UserExperienceUpdate(serializers.Serializer):
+    id = serializers.IntegerField()
     company = serializers.CharField()
     start_date = serializers.DateField()
     end_date = serializers.DateField()
@@ -69,6 +70,7 @@ class StackSerializer(serializers.Serializer):
 
 
 class UserDetailSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
     location = serializers.CharField()
     full_name = serializers.CharField()
     first_name = serializers.CharField()
@@ -90,6 +92,7 @@ class UserDetailSerializer(serializers.Serializer):
 
 class StackUpdateSerializer(serializers.Serializer):
     id = serializers.IntegerField()
+    # name = serializers.CharField()
 
 
 class UserUpdateSerializer(serializers.Serializer):
@@ -107,7 +110,6 @@ class UserUpdateSerializer(serializers.Serializer):
 class UserAmbitionUpdateSerializer(serializers.Serializer):
     about_myself = serializers.CharField()
     achievement = serializers.CharField()
-    expectation = serializers.CharField()
     stacks = serializers.ListField(child=serializers.IntegerField())
 
 

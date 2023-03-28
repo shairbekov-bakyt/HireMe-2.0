@@ -191,3 +191,14 @@ INTERNAL_IPS = [
     "127.0.0.1",
     # ...
 ]
+
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'api_key': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization'
+        }
+    }
+}
