@@ -52,6 +52,7 @@ class TokenAuthentication(BaseAuthentication):
         except User.DoesNotExist:
             return Response({"Error": "Internal server error"}, status="500")
 
+        user.is_authenticated = True
         return (user, token)
 
     def authenticate_header(self, request):
