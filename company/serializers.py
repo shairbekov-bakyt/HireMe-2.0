@@ -28,6 +28,7 @@ class CompanyListSerializer(serializers.Serializer):
 
 
 class CompanyDetailSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
     name = serializers.CharField()
     location = serializers.CharField()
     image = serializers.ImageField()

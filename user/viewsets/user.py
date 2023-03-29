@@ -210,24 +210,16 @@ class UserViewSet(GenericViewSet):
         detail=False,
         methods=["put"],
         url_path="experience",
-        permission_classes=[],
+        # permission_classes=[],
     )
-    def user_experience_update(self, request):
-        user = request.user
-        serializer = UserWorkExperienceUpdateSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer = serializer.data
-        for work in serializer:
-            company_name = work.pop("company")
-            stacks = work.pop("stacks")
-            created_company, created = Company.objects.get_or_create(name=company_name)
-            experience, created = UserWorkExperience.objects.get_or_create(
-                user=user, company=created_company, **work
-            )
-            experience.stacks.set(Stack.objects.filter(pk__in=stacks))
-            experience.save()
 
-        return Response({"message": "user updated successfully"})
+    def user_experience_update(self, request, pk):
+        instance = UserWorkExperience.objects.get(pk=pk)
+        serializer = UserWorkExperienceSerializer(instance)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data, status=200)
+        return Response(serializer.data, status=404)
 
     @swagger_auto_schema(
         methods=["get"],
