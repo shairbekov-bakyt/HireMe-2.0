@@ -41,6 +41,11 @@ class UserCompanySerializer(serializers.Serializer):
     occupation = serializers.CharField()
 
 
+class StackSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    name = serializers.CharField()
+
+
 class UserWorkExperienceSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     company = UserCompanySerializer()
@@ -48,7 +53,7 @@ class UserWorkExperienceSerializer(serializers.Serializer):
     start_date = serializers.DateField()
     end_date = serializers.DateField()
     responsibilities = serializers.CharField()
-    stacks = serializers.StringRelatedField(many=True)
+    stacks = StackSerializer(many=True)
 
 
 class UserExperienceUpdate(serializers.Serializer):
@@ -64,15 +69,9 @@ class UserWorkExperienceUpdateSerializer(serializers.ListSerializer):
     child = UserExperienceUpdate()
 
 
-class StackSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
-    name = serializers.CharField()
-
-
 class UserDetailSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     location = serializers.CharField()
-    full_name = serializers.CharField()
     first_name = serializers.CharField()
     last_name = serializers.CharField()
     position = serializers.CharField()

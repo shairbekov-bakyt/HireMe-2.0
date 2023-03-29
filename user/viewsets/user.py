@@ -1,5 +1,3 @@
-from django.utils.decorators import method_decorator
-from django.views.decorators.cache import cache_page
 from django.core.cache import cache
 
 
@@ -15,6 +13,7 @@ from user.models.user import Company, UserWorkExperience
 from user.serializers.user import (
     UserVerificationSerilizer,
     UserWorkExperienceUpdateSerializer,
+    UserExperienceUpdate,
 )
 from user.utils import (
     get_user_access_token,
@@ -38,7 +37,43 @@ class UserViewSet(GenericViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-    @method_decorator(cache_page(60 * 60 * 2))
+    @swagger_auto_schema(
+        methods=["put"],
+        tags=["users"],
+        request_body=UserExperienceUpdate,
+    )
+    @action(
+        detail=False,
+        methods=["put"],
+        url_path="company/<int:company_id>",
+        permission_classes=[IsAuthenticated],
+    )
+    def update_company(self, request, company_id):
+        company = Company.objects.get(pk=company_id)
+        serializer = UserExperienceUpdate(company, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=200)
+
+        return Response(serializer.errors, status=400)
+
+    @swagger_auto_schema(
+        methods=["get"],
+        tags=["users"],
+    )
+    @action(
+        detail=False,
+        methods=["get"],
+        url_path="company/<int:id>",
+    )
+    def get_company_by_id(self, request, id):
+        try:
+            company = UserWorkExperience.objects.get(pk=id)
+            serializer = UserExperienceUpdate(company)
+            return Response(serializer.data, status=200)
+        except UserWorkExperience.DoesNotExist:
+            return Response({"message": "company not found"}, status=200)
+
     @swagger_auto_schema(
         methods=["get"],
         tags=["users"],
@@ -177,6 +212,7 @@ class UserViewSet(GenericViewSet):
         url_path="experience",
         # permission_classes=[],
     )
+
     def user_experience_update(self, request, pk):
         instance = UserWorkExperience.objects.get(pk=pk)
         serializer = UserWorkExperienceSerializer(instance)
@@ -184,6 +220,21 @@ class UserViewSet(GenericViewSet):
             serializer.save()
             return Response(serializer.data, status=200)
         return Response(serializer.data, status=404)
+
+    @swagger_auto_schema(
+        methods=["get"],
+        tags=["users"],
+    )
+    @action(
+        detail=False,
+        methods=["get"],
+        url_path="profile",
+        permission_classes=[IsAuthenticated],
+    )
+    def get_authenticated_user(self, request):
+        user = request.user
+        serializer = UserDetailSerializer(user)
+        return Response(serializer.data, status=200)
 
     def retrieve(self, request, pk):
         try:
@@ -196,10 +247,10 @@ class UserViewSet(GenericViewSet):
 
     def list(self, request):
         cache_key = "users"
-        serializer = self.get_serializer(self.queryset, many=True)
         get_cache = cache.get(cache_key)
         if get_cache:
             return Response(get_cache, status=200)
 
+        serializer = self.get_serializer(self.queryset, many=True)
         cache.set(cache_key, serializer.data, 60 * 60 * 2)
         return Response(serializer.data, status=200)
