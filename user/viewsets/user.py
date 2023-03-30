@@ -212,7 +212,6 @@ class UserViewSet(GenericViewSet):
         url_path="experience",
         # permission_classes=[],
     )
-
     def user_experience_update(self, request, pk):
         instance = UserWorkExperience.objects.get(pk=pk)
         serializer = UserWorkExperienceSerializer(instance)
