@@ -210,7 +210,7 @@ class UserViewSet(GenericViewSet):
         detail=False,
         methods=["put"],
         url_path="experience",
-        # permission_classes=[],
+        permission_classes=[],
     )
 
     def user_experience_update(self, request, pk):
