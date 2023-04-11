@@ -40,5 +40,6 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd ${{ secrets.TARGET_DIR }}
+            sudo docker network create hireme
             sudo docker-compose -f docker-compose-prod.yml build
             sudo docker-compose -f docker-compose-prod.yml up -d
