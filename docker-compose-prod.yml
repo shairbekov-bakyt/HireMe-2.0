@@ -13,30 +13,29 @@ services:
     depends_on:
       - database
 
+    networks:
+      - hireme
+
   database:
     image: postgres:12.0-alpine
     env_file: .env
+    networks:
+      - hireme
 
   redis_database:
     image: redis:7.0-alpine
     ports:
       - "6379:6379"
 
-  nginx:
-    container_name: dev_web
-    restart: on-failure
-    image: nginx:1.19.8
-    volumes:
-      - ./frontend/nginx.conf:/etc/nginx/conf.d/default.conf
-      - static_volume:/backend/frontend/static
-      - media_volume:/backend/frontend/media
-
-    ports:
-      - 80:80
-
-    depends_on:
-      - server
+    networks:
+      - hireme
 
 volumes:
   static_volume:
   media_volume:
+
+networks:
+  hireme:
+    name: hireme
+    driver: bridge
+    external: true

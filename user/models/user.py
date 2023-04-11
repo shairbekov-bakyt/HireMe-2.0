@@ -48,7 +48,6 @@ class User(models.Model):
     is_active = models.BooleanField()
     stacks = models.ManyToManyField(Stack)
     work_expectations = models.ManyToManyField(WorkExpectation)
-    is_sales = models.BooleanField(default=False)
 
     def __str__(self):
         return self.email

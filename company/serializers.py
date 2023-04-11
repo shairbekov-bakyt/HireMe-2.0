@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from company.models import Company
 from job.models import Job
 
 
@@ -38,3 +39,9 @@ class CompanyDetailSerializer(serializers.Serializer):
     values = serializers.StringRelatedField(many=True)
     company_website = serializers.URLField()
     vacancies = CompanyJobSerializer(many=True)
+
+
+class CompanyCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Company
+        fields = ("__all__",)

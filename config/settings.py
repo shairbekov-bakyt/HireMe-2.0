@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
 ]
 
-MY_APPS = ["user", "job", "company"]
+MY_APPS = ["user", "job", "company", "recruiter"]
 INSTALLED_APPS += MY_APPS
 
 MIDDLEWARE = [
@@ -194,11 +194,7 @@ INTERNAL_IPS = [
 
 
 SWAGGER_SETTINGS = {
-    'SECURITY_DEFINITIONS': {
-        'api_key': {
-            'type': 'apiKey',
-            'in': 'header',
-            'name': 'Authorization'
-        }
+    "SECURITY_DEFINITIONS": {
+        "api_key": {"type": "apiKey", "in": "header", "name": "Authorization"}
     }
 }

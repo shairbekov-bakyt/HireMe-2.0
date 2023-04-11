@@ -1,11 +1,25 @@
-import jwt
 import os
 
-from rest_framework.authentication import BaseAuthentication, get_authorization_header
+import jwt
 from rest_framework import exceptions
+from rest_framework.authentication import (BaseAuthentication,
+                                           get_authorization_header)
 from rest_framework.response import Response
 
+from recruiter.models import Recruiter
 from user.models import User
+
+
+def get_user(payload: dict, email: str, *args, **kwargs):
+    try:
+        is_recruiter = payload["is_recruiter"]
+    except KeyError:
+        is_recruiter = False
+
+    if is_recruiter:
+        return Recruiter.objects.get(email=email)
+
+    return User.objects.get(email=email)
 
 
 class TokenAuthentication(BaseAuthentication):
@@ -40,7 +54,7 @@ class TokenAuthentication(BaseAuthentication):
         payload = jwt.decode(token, os.getenv("SECRET_KEY", ""), algorithms=["HS256"])
         email = payload["email"]
         try:
-            user = User.objects.get(email=email)
+            user = get_user(payload, email)
         except (
             jwt.ExpiredSignatureError
             or jwt.DecodeError
@@ -49,7 +63,7 @@ class TokenAuthentication(BaseAuthentication):
         ):
             return Response({"Error": "Token is invalid"}, status="403")
 
-        except User.DoesNotExist:
+        except User.DoesNotExist or Recruiter.DoesNotExist:
             return Response({"Error": "Internal server error"}, status="500")
 
         user.is_authenticated = True
