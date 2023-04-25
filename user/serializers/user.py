@@ -49,7 +49,6 @@ class StackSerializer(serializers.Serializer):
 class UserWorkExperienceSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     company = UserCompanySerializer()
-    occupation = serializers.CharField()
     start_date = serializers.DateField()
     end_date = serializers.DateField()
     responsibilities = serializers.CharField()
