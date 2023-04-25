@@ -33,6 +33,7 @@ class UserSerializer(serializers.Serializer):
 class UserAmbitions(serializers.Serializer):
     about_myself = serializers.CharField()
     achievement = serializers.CharField()
+    expectation = serializers.CharField()
 
 
 class UserCompanySerializer(serializers.Serializer):
