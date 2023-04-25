@@ -48,6 +48,7 @@ class User(models.Model):
     is_active = models.BooleanField()
     stacks = models.ManyToManyField(Stack)
     work_expectations = models.ManyToManyField(WorkExpectation)
+    description = models.TextField(verbose_name="описание")
 
     def __str__(self):
         return self.email
