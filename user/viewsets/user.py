@@ -34,7 +34,7 @@ from user.serializers import (
 
 
 class UserViewSet(GenericViewSet):
-    queryset = User.objects.all()
+    queryset = User.objects.filter(is_active=True)
     serializer_class = UserSerializer
 
     @swagger_auto_schema(
@@ -245,11 +245,5 @@ class UserViewSet(GenericViewSet):
         return Response(serializer.data, status=200)
 
     def list(self, request):
-        cache_key = "users"
-        get_cache = cache.get(cache_key)
-        if get_cache:
-            return Response(get_cache, status=200)
-
         serializer = self.get_serializer(self.queryset, many=True)
-        cache.set(cache_key, serializer.data, 60 * 60 * 2)
         return Response(serializer.data, status=200)
