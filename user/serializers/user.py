@@ -28,6 +28,7 @@ class UserSerializer(serializers.Serializer):
     user_ambitions = serializers.SlugRelatedField(
         slug_field="about_myself", read_only=True
     )
+    description = serializers.CharField()
 
 
 class UserAmbitions(serializers.Serializer):
